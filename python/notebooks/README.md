@@ -24,6 +24,7 @@ Workshop, bis dahin wird dieser Check übersprungen.
 | Nr. | Notebook                         | Lab                                                                         | Lösung                                     |
 | --- | -------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------ |
 | 00  | Pre-Flight-Check                 | [`00-preflight.ipynb`](00-preflight.ipynb)                                  | –                                          |
+| 01  | Simple Chat                      | [`01-simple-chat-lab.ipynb`](01-simple-chat-lab.ipynb)                      | `01-simple-chat-solution.ipynb`            |
 | 02  | Embeddings & Vector DB           | [`02-embeddings-vector-db-lab.ipynb`](02-embeddings-vector-db-lab.ipynb)    | `02-embeddings-vector-db-solution.ipynb`   |
 | 03  | Simple RAG                       | [`03-simple-rag-lab.ipynb`](03-simple-rag-lab.ipynb)                        | `03-simple-rag-solution.ipynb`             |
 | 04  | Structured Outputs mit LangChain | [`04-structured-outputs-lab.ipynb`](04-structured-outputs-lab.ipynb)        | `04-structured-outputs-solution.ipynb`     |
