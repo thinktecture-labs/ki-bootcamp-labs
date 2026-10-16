@@ -1,0 +1,22 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv*/
+__pycache__/
+*.py[oc]
+.ruff_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Node
+node_modules/
+
+# OS / editors
+.DS_Store

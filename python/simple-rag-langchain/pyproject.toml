@@ -1,0 +1,19 @@
+[project]
+name = "simple-rag-langchain"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "langchain>=1.2.13",
+    "langchain-openai>=1.1.11",
+    "langchain-qdrant>=1.1.0",
+    "langfuse>=4.0.1",
+    "python-dotenv>=1.2.2",
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.408",
+    "ruff>=0.15.7",
+]
