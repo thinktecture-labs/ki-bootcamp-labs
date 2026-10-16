@@ -67,7 +67,6 @@ Reihenfolge wie im Workshop.
 | ------------------------ | ------------------------------------------------------------------------------------------ | -------- |
 | Pre-Flight-Check         | [`python/notebooks/00-preflight.ipynb`](python/notebooks/00-preflight.ipynb)               | vorab    |
 | LangChainJS Chat         | [StackBlitz](https://stackblitz.com/edit/ki-bootcamp-simple-chat?file=index.js)            | ?        |
-| LangChain Chat           | `python/notebooks/01-langchain-chat-lab.ipynb` (folgt)                                     | ?        |
 | Smart Form Filler        | [StackBlitz](https://stackblitz.com/edit/ki-bootcamp-smart-form-filler-lab)                | ?        |
 | Embeddings & Vector DB   | [`python/notebooks/02-embeddings-vector-db-lab.ipynb`](python/notebooks/02-embeddings-vector-db-lab.ipynb) | ?        |
 | Simple RAG               | [`python/notebooks/03-simple-rag-lab.ipynb`](python/notebooks/03-simple-rag-lab.ipynb)     | ?        |
