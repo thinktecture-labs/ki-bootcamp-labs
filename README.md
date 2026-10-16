@@ -73,8 +73,8 @@ Reihenfolge wie im Workshop.
 | Simple RAG               | [`python/notebooks/03-simple-rag-lab.ipynb`](python/notebooks/03-simple-rag-lab.ipynb)     | ?        |
 | Simple RAG mit LangChain | [`python/simple-rag-langchain/`](python/simple-rag-langchain/)                             | ?        |
 | Simple RAG mit LangGraph | [`python/simple-rag-langgraph/`](python/simple-rag-langgraph/)                             | ?        |
-| Structured Outputs       | `python/notebooks/04-structured-outputs-lab.ipynb` (folgt)                                 | ?        |
-| Tool Calling             | `python/notebooks/05-tool-calling-lab.ipynb` (folgt)                                       | ?        |
+| Structured Outputs       | [`python/notebooks/04-structured-outputs-lab.ipynb`](python/notebooks/04-structured-outputs-lab.ipynb) | ?        |
+| Tool Calling             | [`python/notebooks/05-tool-calling-lab.ipynb`](python/notebooks/05-tool-calling-lab.ipynb) | ?        |
 | MCP mit JS               | [StackBlitz](https://stackblitz.com/edit/ki-bootcamp-mcp-client?file=index.js)             | ?        |
 
 Lösungen: Notebooks in [`python/notebooks/`](python/notebooks/README.md), StackBlitz-Lösungen
