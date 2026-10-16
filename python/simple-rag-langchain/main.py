@@ -24,8 +24,8 @@ llm_mistral = ChatOpenAI(
     api_key=api_key,
 )
 
-# OVH Llama 3.1 8B
-llm_llama = ChatOpenAI(
+# OVH Qwen3.8 27B
+llm_qwen = ChatOpenAI(
     model="Qwen3.8-27B",
     temperature=0,
     base_url="https://oai.endpoints.kepler.ai.cloud.ovh.net/v1",
@@ -89,15 +89,15 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-chain_llama = prompt | llm_llama | StrOutputParser()
+chain_qwen = prompt | llm_qwen | StrOutputParser()
 
-answer_llama = chain_llama.invoke(
+answer_qwen = chain_qwen.invoke(
     {"context": context, "question": query},
     config={"callbacks": [handler]},
 )
 
-print("-- Llama --")
-print(answer_llama)
+print("-- Qwen --")
+print(answer_qwen)
 print()
 
 chain_mistral = prompt | llm_mistral | StrOutputParser()
