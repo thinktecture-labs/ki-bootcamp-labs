@@ -1,5 +1,5 @@
-// Dev container for the KI-Bootcamp labs. Used by GitHub Codespaces (the fallback for
-// participants whose corporate VPN/proxy blocks Google Colab) and by VS Code "Dev Containers".
+// Dev container for the KI-Bootcamp labs. Participants work in GitHub Codespaces; locally the
+// same container opens with VS Code "Dev Containers".
 // Format: https://containers.dev/implementors/json_reference/
 {
   "name": "KI Bootcamp Labs",
@@ -39,6 +39,9 @@
   },
 
   "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
     "vscode": {
       "extensions": [
         "ms-python.python",
