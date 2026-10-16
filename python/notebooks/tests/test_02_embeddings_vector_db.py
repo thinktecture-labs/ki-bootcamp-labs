@@ -1,4 +1,4 @@
-"""Initial test for the "Embeddings & Vector DB" lab (Colab export of F95_Vector_DB_Lab).
+"""Tests for the "Embeddings & Vector DB" lab (originally the Colab notebook F95_Vector_DB_Lab).
 
 The structural tests run everywhere. The live test runs what participants are expected to
 build (bge-m3 via OVH AI Endpoints into an in-memory Qdrant collection, then the lab's
@@ -17,7 +17,6 @@ from IPython.core.inputtransformer2 import TransformerManager
 NOTEBOOK = NOTEBOOKS_DIR / "02-embeddings-vector-db-lab.ipynb"
 OVH_BASE_URL = "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1"
 EMBEDDING_MODEL = "bge-m3"
-COLAB_SECRET_NAME = "OVH_AI_ENDPOINTS_ACCESS_TOKEN"
 
 QUERY_RUSSIAN_EMBASSY = (
     "Which movie is about a device in the Russian embassy? "
@@ -63,21 +62,17 @@ def test_lab_keeps_its_task_placeholders(code: list[str]) -> None:
 
 
 def test_lab_uses_the_workshop_stack(code: list[str]) -> None:
-    install_cell = code[0]
-    assert "pip" in install_cell and "install" in install_cell
-    for package in ("langchain", "langchain_openai", "langchain_qdrant"):
-        assert package in install_cell, f"{package} missing from the install cell"
     source = "\n".join(code)
     assert "from langchain_openai import OpenAIEmbeddings" in source
     assert "from langchain_qdrant import QdrantVectorStore" in source
     assert 'collection_name="movies"' in source
 
 
-def test_lab_reads_the_ovh_token_from_colab_secrets(code: list[str]) -> None:
-    """Participants store the token under this name in Colab (🔑 Secrets); keep README in sync."""
+def test_lab_reads_the_ovh_key_from_the_environment(code: list[str]) -> None:
+    """Codespaces secret / .env name; keep README and devcontainer.json in sync."""
     source = "\n".join(code)
-    assert "from google.colab import userdata" in source
-    assert f'userdata.get("{COLAB_SECRET_NAME}")' in source
+    assert "load_dotenv()" in source
+    assert 'api_key=os.environ["OVH_API_KEY"]' in source
 
 
 def test_demo_data_are_the_bond_movies(docs_movies: list[str]) -> None:

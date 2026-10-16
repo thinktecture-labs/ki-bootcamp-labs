@@ -1,4 +1,4 @@
-"""Structural checks for every notebook in this folder: valid nbformat, Python that compiles."""
+"""Checks for every notebook in this folder: valid nbformat, compiling code, Codespaces-ready."""
 
 from pathlib import Path
 
@@ -25,8 +25,8 @@ def test_notebook_is_valid_nbformat(path: Path) -> None:
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda p: p.name)
 def test_code_cells_compile(path: Path) -> None:
-    """Every code cell must be valid IPython: `%pip` / `!pip` lines are transformed first,
-    task placeholders (`...`) are valid Python, a stray `..` is not."""
+    """Every code cell must be valid IPython: magics are transformed first, task
+    placeholders (`...`) are valid Python, a stray `..` is not."""
     transformer = TransformerManager()
     for index, cell in enumerate(read(path).cells):
         if cell.cell_type != "code":
@@ -37,10 +37,27 @@ def test_code_cells_compile(path: Path) -> None:
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda p: p.name)
 def test_notebook_has_no_stored_outputs(path: Path) -> None:
-    """Notebooks are committed clean (Colab export → outputs cleared) to keep diffs readable."""
+    """Notebooks are committed without outputs to keep diffs readable."""
     for index, cell in enumerate(read(path).cells):
         if cell.cell_type == "code":
             assert not cell.outputs, f"{path.name}[cell {index}] has stored outputs"
             assert cell.execution_count is None, (
                 f"{path.name}[cell {index}] has an execution count"
             )
+
+
+@pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda p: p.name)
+def test_notebook_runs_in_codespaces(path: Path) -> None:
+    """No Colab-only APIs, no package installs (dependencies come from pyproject.toml), and the
+    dev container's kernel preselected so VS Code does not ask."""
+    notebook = read(path)
+    assert notebook.metadata.kernelspec.name == "notebooks"
+    assert "colab" not in notebook.metadata
+    for index, cell in enumerate(notebook.cells):
+        if cell.cell_type != "code":
+            continue
+        where = f"{path.name}[cell {index}]"
+        assert "google.colab" not in cell.source, f"{where} uses google.colab"
+        assert "pip install" not in cell.source, (
+            f"{where} installs packages; add them to pyproject.toml"
+        )

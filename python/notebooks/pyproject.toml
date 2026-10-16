@@ -1,7 +1,7 @@
 [project]
 name = "notebooks"
 version = "0.1.0"
-description = "Kernel environment for the Colab notebooks when they run in GitHub Codespaces instead of Colab"
+description = "Kernel environment for the notebook labs (Jupyter kernel \"Python (notebooks)\")"
 requires-python = ">=3.14"
 dependencies = [
     "ipykernel>=7.0",
@@ -11,7 +11,7 @@ dependencies = [
     "langgraph>=0.4",
     "langfuse>=3.0",
     "python-dotenv>=1.0",
-    # The Colab notebooks start with `%pip install …`; that needs pip inside the kernel's venv.
+    # Lets participants `%pip install` extras into the kernel's venv during experiments.
     "pip>=25",
 ]
 
