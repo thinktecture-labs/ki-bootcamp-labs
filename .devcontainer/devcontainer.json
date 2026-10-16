@@ -1,0 +1,60 @@
+// Dev container for the KI-Bootcamp labs. Used by GitHub Codespaces (the fallback for
+// participants whose corporate VPN/proxy blocks Google Colab) and by VS Code "Dev Containers".
+// Format: https://containers.dev/implementors/json_reference/
+{
+  "name": "KI Bootcamp Labs",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    // Node for the LangChain.js / Angular side (the Angular labs themselves run on StackBlitz).
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+
+  // uv resolves a relative UV_PROJECT_ENVIRONMENT against each project's own root, so every
+  // lab gets its own venv at python/<lab>/.venv-devcontainer. Deliberately not `.venv`: with a
+  // local bind mount, `uv sync` would otherwise replace the host's virtualenv with a Linux one.
+  "containerEnv": {
+    "UV_PROJECT_ENVIRONMENT": ".venv-devcontainer",
+    "UV_LINK_MODE": "copy"
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  // The labs read these from the environment (python-dotenv also loads a local .env file).
+  // In Codespaces: github.com → Settings → Codespaces → Secrets, or repository secrets.
+  "secrets": {
+    "OVH_API_KEY": {
+      "description": "OVH AI Endpoints token (handed out during the workshop)"
+    },
+    "LANGFUSE_PUBLIC_KEY": {
+      "description": "Langfuse project public key (pk-lf-…)"
+    },
+    "LANGFUSE_SECRET_KEY": {
+      "description": "Langfuse project secret key (sk-lf-…)"
+    },
+    "LANGFUSE_BASE_URL": {
+      "description": "Optional. Only for Langfuse accounts in the US region: https://us.cloud.langfuse.com (default is the EU region https://cloud.langfuse.com)"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/python/simple-rag-langgraph/.venv-devcontainer/bin/python",
+        // Labs are run with `uv run`, which picks the right venv per lab; no auto-activation.
+        "python.terminal.activateEnvironment": false,
+        "files.watcherExclude": { "**/.venv-devcontainer/**": true },
+        "search.exclude": { "**/.venv-devcontainer": true }
+      }
+    }
+  },
+
+  "remoteUser": "vscode"
+}
