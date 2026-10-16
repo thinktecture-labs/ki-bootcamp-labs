@@ -1,0 +1,26 @@
+[project]
+name = "notebooks"
+version = "0.1.0"
+description = "Kernel environment for the Colab notebooks when they run in GitHub Codespaces instead of Colab"
+requires-python = ">=3.14"
+dependencies = [
+    "ipykernel>=7.0",
+    "langchain>=1.2",
+    "langchain-openai>=1.1",
+    "langchain-qdrant>=1.1",
+    "langgraph>=0.4",
+    "langfuse>=3.0",
+    "python-dotenv>=1.0",
+    # The Colab notebooks start with `%pip install …`; that needs pip inside the kernel's venv.
+    "pip>=25",
+]
+
+[dependency-groups]
+dev = [
+    "nbformat>=5.10",
+    "pytest>=8.0",
+    "ruff>=0.15",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
