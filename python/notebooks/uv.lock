@@ -893,7 +893,9 @@ dependencies = [
     { name = "langfuse" },
     { name = "langgraph" },
     { name = "pip" },
+    { name = "pydantic" },
     { name = "python-dotenv" },
+    { name = "requests" },
 ]
 
 [package.dev-dependencies]
@@ -912,7 +914,9 @@ requires-dist = [
     { name = "langfuse", specifier = ">=3.0" },
     { name = "langgraph", specifier = ">=0.4" },
     { name = "pip", specifier = ">=25" },
+    { name = "pydantic", specifier = ">=2.14.1" },
     { name = "python-dotenv", specifier = ">=1.0" },
+    { name = "requests", specifier = ">=2.34.2" },
 ]
 
 [package.metadata.requires-dev]

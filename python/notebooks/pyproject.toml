@@ -13,6 +13,8 @@ dependencies = [
     "python-dotenv>=1.0",
     # Lets participants `%pip install` extras into the kernel's venv during experiments.
     "pip>=25",
+    "requests>=2.34.2",
+    "pydantic>=2.14.1",
 ]
 
 [dependency-groups]
