@@ -10,12 +10,12 @@ settings without asking Felix.
 
 - `python/<lab>/`: one uv project per lab (`pyproject.toml`, `uv.lock`, `.python-version` 3.14,
   `.env.example`). Run from the lab's folder.
-- `python/notebooks/`: Colab notebooks exported from Google Drive, plus a uv project that serves
-  as their kernel in Codespaces and runs the notebook tests. `00-preflight.ipynb` is the
-  participants' pre-workshop check.
+- `python/notebooks/`: notebook labs (originally Colab notebooks from Google Drive, converted to
+  run in Codespaces), plus a uv project that is their kernel ("Python (notebooks)") and runs the
+  notebook tests. `00-preflight.ipynb` is the participants' pre-workshop check.
 - `angular/`: links only; the Angular/JS labs live on StackBlitz and in their own repos.
-- `.devcontainer/`: one container for everything (GitHub Codespaces fallback when Colab is
-  blocked). `post-create.sh` syncs every `python/*/pyproject.toml` and registers a kernel each.
+- `.devcontainer/`: one container for everything; Codespaces is the participants' primary
+  environment. `post-create.sh` syncs every `python/*/pyproject.toml` and registers a kernel each.
 
 ## Running and testing
 
@@ -40,8 +40,10 @@ the test container and its `vsc-ki-bootcamp-labs-*` image afterwards, and delete
   overwrite. Do not set it to `.venv` and do not add a venv at the repo root.
 - Keep lock files frozen-installable: change dependencies with `uv add`/`uv lock` in the lab's
   folder and commit `uv.lock` with `pyproject.toml`.
-- Notebooks are committed without outputs; `uv run pytest` in `python/notebooks` enforces it.
-  Keep the lab notebooks' `...` placeholders and `Task:` hints intact.
+- Notebooks are Codespaces-first: keys via `load_dotenv()` + `os.environ["OVH_API_KEY"]`, never
+  `google.colab`; no `pip install` cells (add packages with `uv add` in `python/notebooks`);
+  kernelspec `notebooks`; no stored outputs. `uv run pytest` there enforces all of this. Keep the
+  lab notebooks' `...` placeholders and `Task:` hints intact.
 - Models (OVH AI Endpoints, `https://oai.endpoints.kepler.ai.cloud.ovh.net/v1`):
   `Mistral-Small-3.2-24B-Instruct-2506`, `Qwen3.8-27B`, embeddings `bge-m3`. Keep README tables in
   sync when a model changes.
