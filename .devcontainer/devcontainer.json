@@ -54,7 +54,9 @@
         // Labs are run with `uv run`, which picks the right venv per lab; no auto-activation.
         "python.terminal.activateEnvironment": false,
         "files.watcherExclude": { "**/.venv-devcontainer/**": true },
-        "search.exclude": { "**/.venv-devcontainer": true }
+        "search.exclude": { "**/.venv-devcontainer": true },
+        // Long LLM answers wrap instead of scrolling sideways in notebook outputs.
+        "notebook.output.wordWrap": true
       }
     }
   },
