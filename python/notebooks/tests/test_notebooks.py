@@ -25,13 +25,14 @@ def test_notebook_is_valid_nbformat(path: Path) -> None:
 
 @pytest.mark.parametrize("path", NOTEBOOKS, ids=lambda p: p.name)
 def test_code_cells_compile(path: Path) -> None:
-    """Every code cell must be valid IPython: magics are transformed first, task
-    placeholders (`...`) are valid Python, a stray `..` is not."""
+    """Every code cell must be valid IPython once task placeholders (`...`) are filled in."""
     transformer = TransformerManager()
     for index, cell in enumerate(read(path).cells):
         if cell.cell_type != "code":
             continue
-        source = transformer.transform_cell(cell.source)
+        # Lab placeholders may stand anywhere (`OpenAI...`, `... = "..."`), so compile them as a
+        # name; a stray `..` still fails.
+        source = transformer.transform_cell(cell.source.replace("...", "_"))
         compile(source, f"{path.name}[cell {index}]", "exec")
 
 
